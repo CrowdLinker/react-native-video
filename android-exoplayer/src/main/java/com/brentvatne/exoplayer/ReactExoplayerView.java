@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.accessibility.CaptioningManager;
 import android.widget.FrameLayout;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 
 import com.brentvatne.react.R;
@@ -227,13 +226,11 @@ class ReactExoplayerView extends FrameLayout implements
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         initializePlayer();
-        setKeepScreenOn(true);
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        setKeepScreenOn(false);
         /* We want to be able to continue playing audio when switching tabs.
          * Leave this here in case it causes issues.
          */
@@ -619,6 +616,10 @@ class ReactExoplayerView extends FrameLayout implements
             initializePlayer();
         }
 
+        if (!disableFocus) {
+            setKeepScreenOn(preventsDisplaySleepDuringVideoPlayback);
+        }
+
     }
 
     private void pausePlayback() {
@@ -627,6 +628,7 @@ class ReactExoplayerView extends FrameLayout implements
                 setPlayWhenReady(false);
             }
         }
+        setKeepScreenOn(false);
     }
 
     private void stopPlayback() {
@@ -1201,7 +1203,6 @@ class ReactExoplayerView extends FrameLayout implements
             } else {
                 pausePlayback();
             }
-            setKeepScreenOn(!isPaused);
         }
     }
 
