@@ -419,7 +419,9 @@ class ReactExoplayerView extends FrameLayout implements
         if (indexOfPC != -1) {
             removeViewAt(indexOfPC);
         }
-        addView(playerControlView, 1, layoutParams);
+        // addView(playerControlView, 1, layoutParams);
+        // Fix from https://github.com/react-native-video/react-native-video/issues/1846#issuecomment-707594373
+        addView(playerControlView);
     }
 
     /**
