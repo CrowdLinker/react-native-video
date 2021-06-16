@@ -5,7 +5,7 @@
 You can provide some configuration to allow DRM playback.
 This feature will disable the use of `TextureView` on Android.
 
-DRM object allows this members:
+DRM object allows this members: 
 
 | Property | Type | Default | Platform | Description |
 | --- | --- | --- | --- | --- |
